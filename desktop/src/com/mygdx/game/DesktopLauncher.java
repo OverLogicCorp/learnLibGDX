@@ -10,6 +10,8 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("learnLibGDX");
+		config.setWindowedMode(800, 480);
+		config.useVsync(true);
 		new Lwjgl3Application(new MainLearn(), config);
 	}
 }

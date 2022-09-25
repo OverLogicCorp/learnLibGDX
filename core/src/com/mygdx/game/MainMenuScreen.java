@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.tutoriales.Learn1;
+import com.mygdx.game.tutoriales.Learn2;
 import com.mygdx.game.utils.Learn;
 
 public class MainMenuScreen extends BaseScreen {
@@ -39,6 +40,8 @@ public class MainMenuScreen extends BaseScreen {
 
     private BaseScreen getScreen(Learn learn) {
         switch (learn) {
+            case LEARN_2:
+                return new Learn2(game);
             default:
                 return new Learn1(game);
         }
