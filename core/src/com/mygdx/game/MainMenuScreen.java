@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.tutoriales.Learn1;
 import com.mygdx.game.tutoriales.Learn2;
 import com.mygdx.game.tutoriales.Learn3;
+import com.mygdx.game.tutoriales.Learn4;
 import com.mygdx.game.utils.Learn;
 
 public class MainMenuScreen extends BaseScreen {
@@ -41,10 +42,14 @@ public class MainMenuScreen extends BaseScreen {
 
     private BaseScreen getScreen(Learn learn) {
         switch (learn) {
+            case LEARN_1:
+                return new Learn1(game);
             case LEARN_2:
                 return new Learn2(game);
             case LEARN_3:
                 return new Learn3(game);
+            case LEARN_4:
+                return new Learn4(game);
             default:
                 return new Learn1(game);
         }
