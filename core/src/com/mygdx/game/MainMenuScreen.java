@@ -49,6 +49,8 @@ public class MainMenuScreen extends BaseScreen {
                 return new Learn4(game);
             case LEARN_5:
                 return new Learn5(game);
+            case LEARN_6:
+                return new Learn6(game);
             default:
                 return new Learn1(game);
         }
