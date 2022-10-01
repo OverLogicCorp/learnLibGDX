@@ -27,16 +27,20 @@ public abstract class BaseScreen extends InputAdapter implements Screen {
     public BaseScreen(MainLearn game) {
         this.game = game;
 
+        // We will add UI elements to the stage
         stage = new Stage(new StretchViewport(SCREEN_WIDTH, SCREEN_HEIGHT));
 
+        // Create the UI Camera and center it on the screen
         oCamUI = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
         oCamUI.position.set(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, 0);
 
+        // Create the Game Camera and center it on the screen
         oCamBox2D = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
         oCamBox2D.position.set(WORLD_WIDTH / 2f, WORLD_HEIGHT / 2f, 0);
 
         spriteBatch = new SpriteBatch();
 
+        // We need it to tell the InputAdapter and stage when we receive events
         InputMultiplexer inputMultiplexer = new InputMultiplexer(this, stage);
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
@@ -44,17 +48,24 @@ public abstract class BaseScreen extends InputAdapter implements Screen {
     public abstract void update(float delta);
     public abstract void draw(float delta);
 
+    // This functions will be called automatically 60 times per second (60 FPS)
     @Override
     public void render(float delta) {
+        // Update all the physics of the game
         update(delta);
+        // Update the stage (mostly UI elements)
         stage.act(delta);
+        // Clear everything on the screen
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // Draw the game elements on the screen
         draw(delta);
+        // Draw the stage element on the screen
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
+        // If the screen size change we adjust the stage
         stage.getViewport().update(width, height, true);
     }
 

@@ -16,18 +16,20 @@ public class MainMenuScreen extends BaseScreen {
         super(game);
 
         Table menu = new Table();
-        menu.setFillParent(true);
-        menu.defaults().uniform().fillY();
+        //menu.setFillParent(true);
+        //menu.defaults().uniform().fillY();
+        menu.defaults().expandY().fillY();
 
         for (final Learn learn : Learn.values()) {
             TextButton bt = new TextButton(learn.name, Assets.textButtonStyle);
             bt.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    MainMenuScreen.this.game.setScreen(getScreen(learn));
+                    setScreen(learn);
                 }
             });
-            menu.row().padTop(20).height(50);
+
+            menu.row().padTop(15).height(50);
             menu.add(bt).fillX();
         }
 
@@ -36,25 +38,12 @@ public class MainMenuScreen extends BaseScreen {
         scroll.setPosition(150, 0);
         stage.addActor(scroll);
     }
-
-    private BaseScreen getScreen(Learn learn) {
-        switch (learn) {
-            case LEARN_1:
-                return new Learn1(game);
-            case LEARN_2:
-                return new Learn2(game);
-            case LEARN_3:
-                return new Learn3(game);
-            case LEARN_4:
-                return new Learn4(game);
-            case LEARN_5:
-                return new Learn5(game);
-            case LEARN_6:
-                return new Learn6(game);
-            case LEARN_7:
-                return new Learn7(game);
-            default:
-                return new Learn1(game);
+    private void setScreen(Learn learn) {
+        try {
+            BaseScreen newScreen = learn.clazz.getConstructor(MainLearn.class).newInstance(game);
+            game.setScreen(newScreen);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
